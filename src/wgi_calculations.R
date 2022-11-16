@@ -1,8 +1,10 @@
 library(dplyr)
 library(tidyr)
+setwd("C:/Users/CamPc/Documents/ACO/3A/visualisation-emilie-manon")
+
 
 # WGI calculation 
-data <- read.csv("../data/wgidataset.csv")
+data <- read.csv("data/wgidataset.csv")
 d <- data[,c("countryname", "year", "vae","pve","gee","rqe","rle","cce")]
 d <- gather(d, "indicator", "value", vae:cce)
 
