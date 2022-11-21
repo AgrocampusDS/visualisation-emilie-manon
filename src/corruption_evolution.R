@@ -9,11 +9,9 @@ library(tidyverse)
 library(dplyr)
 library(ggrepel)
 library(ggtext)
-
-library(showtext)
-font_add_google("Lato")
-showtext_auto()
-
+library(ggplot2)
+library(hrbrthemes)
+library(viridis)
 ########################
 #LOAD DATA
 ########################
@@ -44,77 +42,40 @@ df_mac_indexed <- df_mac %>%
   ) %>% 
   ungroup()
 
-#########################
-#THEME
-#########################
-# This theme extends the 'theme_minimal' that comes with ggplot2.
-# The "Lato" font is used as the base font. This is similar
-# to the original font in Cedric's work, Avenir Next Condensed.
-theme_set(theme_minimal(base_family = "Lato"))
-
-
-theme_update(
-  # Remove title for both x and y axes
-  axis.title = element_blank(),
-  # Axes labels are grey
-  axis.text = element_text(color = "grey40"),
-  # The size of the axes labels are different for x and y.
-  axis.text.x = element_text(size = 20, margin = margin(t = 5)),
-  axis.text.y = element_text(size = 17, margin = margin(r = 5)),
-  # Also, the ticks have a very light grey color
-  axis.ticks = element_line(color = "grey91", size = .5),
-  # The length of the axis ticks is increased.
-  axis.ticks.length.x = unit(1.3, "lines"),
-  axis.ticks.length.y = unit(.7, "lines"),
-  # Remove the grid lines that come with ggplot2 plots by default
-  panel.grid = element_blank(),
-  # Customize margin values (top, right, bottom, left)
-  plot.margin = margin(20, 40, 20, 40),
-  # Use a light grey color for the background of both the plot and the panel
-  plot.background = element_rect(fill = "grey98", color = "grey98"),
-  panel.background = element_rect(fill = "grey98", color = "grey98"),
-  # Customize title appearence
-  plot.title = element_text(
-    color = "grey10", 
-    size = 28, 
-    face = "bold",
-    margin = margin(t = 15)
-  ),
-  # Customize subtitle appearence
-  plot.subtitle = element_markdown(
-    color = "grey30", 
-    size = 16,
-    lineheight = 1.35,
-    margin = margin(t = 15, b = 40)
-  ),
-  # Title and caption are going to be aligned
-  plot.title.position = "plot",
-  plot.caption.position = "plot",
-  plot.caption = element_text(
-    color = "grey30", 
-    size = 13,
-    lineheight = 1.2, 
-    hjust = 0,
-    margin = margin(t = 40) # Large margin on the top of the caption.
-  ),
-  # Remove legend
-  legend.position = "none"
-)
-
 
 ###########################
 #PLOT
 ###########################
+usa_corruption <- df_mac_indexed[df_mac_indexed$countryname == "United States" ,]
 plt <- ggplot(
   # The ggplot object has associated the data for the highlighted countries
-  df_mac_indexed[df_mac_indexed$countryname == "United States" ,], 
+  usa_corruption, 
   aes(year, wgi , group = countryname))+
-  geom_line(color = "red") +
+  geom_line(color = "#21918c") +
+  scale_x_continuous(breaks = round(seq(min(usa_corruption$year),
+                                        max(usa_corruption$year), 
+                                        by = 1))) +
   geom_label(aes(label = countryname),
-             color = "red",
-             data = df_mac_indexed[df_mac_indexed$countryname == "United States" ,] %>% filter(year == "2021"),
+             color = "#21918c",
+             data = usa_corruption %>% filter(year == "2021"),
              nudge_x = 0.35,
-             size = 4) 
+             size = 4) +
+  layer(data = usa_corruption %>% filter(year >= 2001 & year <=2006),
+        geom = "area", 
+        mapping = aes(x = year, y = wgi),
+        stat = "identity",
+        position = "identity",
+        params = list(fill = "#addc30", alpha = 0.5)) +
+  geom_vline(xintercept = 2001, color = "#5ec962", size = 1.5)+
+  geom_label(aes(2001, 2), label = "Terrorist attack\n9/11",
+             show.legend = FALSE, color = "#5ec962" )+  
+  geom_vline(xintercept = 2016, color= "#440154", size = 1.5)+
+  geom_label(aes(2016, 2), label = "Trump president",
+             show.legend = FALSE, color = "#440154" )+ 
+  theme_ipsum(axis_title_just = c(2), axis_title_size = 8 , plot_title_size = 10 
+              , plot_title_face = "plain",axis_text_size = 6) +
+  theme(legend.text = element_text(size= 6),legend.title = element_text(size = 8))
+
 plt
 
 
