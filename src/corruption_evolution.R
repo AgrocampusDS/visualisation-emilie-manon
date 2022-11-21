@@ -26,7 +26,7 @@ df_mac <- d_calcs %>%
   ungroup()
 
 # Also define the group of countries that are going to be highlighted
-highlights <- c("France", "Russia", "United Stats", "China", "Afghanistan")
+highlights <- c("Russia")
 n <- length(highlights)
 
 
@@ -107,95 +107,22 @@ theme_update(
 ###########################
 plt <- ggplot(
   # The ggplot object has associated the data for the highlighted countries
-  df_mac_indexed, 
-  aes(year, wgi , group = countryname)
-) + 
-  # Geometric annotations that play the role of grid lines
-  geom_vline(
-    xintercept = seq(1995, 2021, by = 1),
-    color = "grey91", 
-    size = .6
-  ) +
-  geom_segment(
-    data = tibble(y = seq(-3, 3, by = 1), x1 = 1995, x2 = 2021),
-    aes(x = x1, xend = x2, y = y, yend = y),
-    inherit.aes = FALSE,
-    color = "grey91",
-    size = .6
-  ) +
-  geom_segment(
-    data = tibble(y = 0, x1 = 1995, x2 = 2020),
-    aes(x = x1, xend = x2, y = y, yend = y),
-    inherit.aes = FALSE,
-    color = "grey60",
-    size = .8
-  ) +
-  ## Lines for the non-highlighted countries
-  geom_line(
-    data = df_mac_indexed %>% filter(group == "other"),
-    color = "grey",
-    size = .6,
-    alpha = .5
-  ) +
-  ## Lines for the highlighted countries.
-  # It's important to put them after the grey lines
-  # so the colored ones are on top
-  geom_line(
-    aes(color = group),
-    size = .9
-  )
+  df_mac_indexed[df_mac_indexed$countryname == "United States" ,], 
+  aes(year, wgi , group = countryname))+
+  geom_line(color = "red") +
+  geom_label(aes(label = countryname),
+             color = "red",
+             data = df_mac_indexed[df_mac_indexed$countryname == "United States" ,] %>% filter(year == "2021"),
+             nudge_x = 0.35,
+             size = 4) 
 plt
-
-
-######################
-#ADD LABELS
-######################
-plt <- plt +
-  geom_text_repel(
-    aes(color = group),
-    family = "Lato",
-    fontface = "bold",
-    size = 8,
-    direction = "y",
-    xlim = c(2020.8, NA),
-    hjust = 0,
-    segment.size = .7,
-    segment.alpha = .5,
-    segment.linetype = "dotted",
-    box.padding = .4,
-    segment.curvature = -0.1,
-    segment.ncp = 3,
-    segment.angle = 20
-  ) +
-  ## coordinate system + scales
-  coord_cartesian(
-    clip = "off",
-    ylim = c(-4, 3)
-  ) +
-  scale_x_continuous(
-    expand = c(0, 0),
-    limits = c(2000, 2023.5), 
-    breaks = seq(2000, 2020, by = 5)
-  ) +
-  scale_y_continuous(
-    expand = c(0, 0),
-    breaks = seq(-4, 3, by = 1),
-    labels = glue::glue("{format(seq(-4, 3, by = 1), nsmall = 2)}$")
-  )
-plt 
-
 
 
 ######################
 #ADD TITLES
 ######################
 plt <- plt + 
-  scale_color_manual(
-    values = c(rcartocolor::carto_pal(n = n, name = "Bold")[1:n-1], "grey50")
-  ) +
   labs(
-    title = "Compared to the financial crisis in 2008, how much more or less do you have to pay for a Big Mac today?",
-    subtitle = "The <i>index chart</i> visualizes the price changes (in USD) of a Big Mac based on a 2008 as index year. The <b>Big Mac Index</b> is published by The Economist as an informal way to provide a test of the<br>extent to which market exchange rates result in goods costing the same in different countries. It <i>seeks to make exchange-rate theory a bit more digestible</i> and takes its name from the Big Mac,<br>a hamburger sold at McDonald's restaurants.",
-    caption = "Visualization by Cédric Scherer  •  Data by The Economist  •  The index chart shows the 27 countries that provide Big mac prices for all years from 2000 to 2020. In case a country was reported twice per year, the mean value was visualized."
-  )
+    title = "Corruption indicator evolution in the United States between 1996 en 2020", 
+    subtitle = "The <i>wgi</i> visualizes the evolution of..."  )
 plt
