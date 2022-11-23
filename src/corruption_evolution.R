@@ -75,7 +75,6 @@ plt <- ggplot(
   theme_ipsum(axis_title_just = c(2), axis_title_size = 8 , plot_title_size = 10 
               , plot_title_face = "plain",axis_text_size = 6) +
   theme(legend.text = element_text(size= 6),legend.title = element_text(size = 8))
-
 plt
 
 
