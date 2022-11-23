@@ -39,8 +39,8 @@ Column {data-width=650}
 
 ### Some static graph
 
-```{r vis1,  echo = FALSE,  message = FALSE, warning=FALSE}
-![](www/word_indicators.png)
+```{r pressure, echo=FALSE, fig.cap="A caption", out.width = '100%'}
+knitr::include_graphics("www/word_indicators.png")
 
 ```
 
