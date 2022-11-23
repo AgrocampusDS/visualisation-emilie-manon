@@ -2,9 +2,7 @@ library(dplyr)
 library(leaflet)
 library(sf)
 library(rgdal)
-setwd("C:/Users/CamPc/Documents/ACO/3A/visualisation-emilie-manon")
-
-source("src/wgi_calculations.R")
+source("./src/wgi_calculations.R")
 
 wgi_21 <- d_calcs %>%
   filter(year == 2021) %>%
@@ -14,7 +12,7 @@ code_wgi <- wgi_21$code
 code_wgi <- code_wgi[!duplicated(code_wgi)]
 
 # Geometry
-shapes <- st_read("data/countries_shp/TM_WORLD_BORDERS-0.3.shp")
+shapes <- st_read("./data/countries_shp/TM_WORLD_BORDERS-0.3.shp")
 
 # Gestion of mis matching codes
 code_shapes <- shapes$ISO3
