@@ -40,7 +40,7 @@ Column {data-width=650}
 ### Some static graph
 
 ```{r vis1,  echo = FALSE,  message = FALSE, warning=FALSE}
-img(src="www/word_indicators.png",height="70%", width="70%", align="center")
+![](www/word_indicators.png)
 
 ```
 
