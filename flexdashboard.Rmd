@@ -32,7 +32,7 @@ library(plotly)
 
 # World Corruption Overview 
 
-```{r pressure, echo=FALSE, out.width = '100%'}
+```{r, echo=FALSE, out.width = '100%'}
 knitr::include_graphics("www/word_indicators.png")
 
 ```
