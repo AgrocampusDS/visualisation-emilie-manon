@@ -37,19 +37,10 @@ library(plotly)
 Column {data-width=650}
 -----------------------------------------------------------------------
 
-### An easy solution for dashboard
-
-```{r, echo = TRUE}
-#install.package('flexdasboard')
-#rmarkdown::draft("dashboard.Rmd", template = "flex_dashboard", package = "flexdashboard")
-```
-
-The [flexdashboard website](https://rmarkdown.rstudio.com/flexdashboard/index.html) provides multiple advanced examples.
-
 ### Some static graph
 
-```{r graph_static,  echo = FALSE,  message = FALSE, warning=FALSE}
-img(src="word_indicators.png",height="70%", width="70%", align="center")
+```{r vis1,  echo = FALSE,  message = FALSE, warning=FALSE}
+img(src="www/word_indicators.png",height="70%", width="70%", align="center")
 
 ```
 
