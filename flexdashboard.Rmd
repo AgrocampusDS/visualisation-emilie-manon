@@ -49,9 +49,7 @@ The [flexdashboard website](https://rmarkdown.rstudio.com/flexdashboard/index.ht
 ### Some static graph
 
 ```{r data, eval = TRUE, echo = FALSE, results='hide', message = FALSE, warning=FALSE}
-n <- 100
-dta <- tibble(size = round(rnorm(n, mean = 0, sd =10),2), 
-           color = sample(x= c('Blue', 'Yellow'), size = n, replace = TRUE))
+img(src="word_indicators.png",height="70%", width="70%", align="center")
 
 ```
 
