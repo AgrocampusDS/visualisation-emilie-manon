@@ -48,17 +48,9 @@ The [flexdashboard website](https://rmarkdown.rstudio.com/flexdashboard/index.ht
 
 ### Some static graph
 
-```{r data, eval = TRUE, echo = FALSE, results='hide', message = FALSE, warning=FALSE}
+```{r graph_static,  echo = FALSE,  message = FALSE, warning=FALSE}
 img(src="word_indicators.png",height="70%", width="70%", align="center")
 
-```
-
-
-```{r graph_static,  echo = FALSE,  message = FALSE, warning=FALSE}
-p1 <- dta %>% ggplot() +
-  aes(x=color, y = size) +
-  geom_boxplot(aes(fill= color))
-p1
 ```
 
 Column {.tabset .tabset-fade}
