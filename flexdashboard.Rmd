@@ -1,15 +1,11 @@
 ---
-title: "Un joli titre pour le dashboard"
-author: "Marie-Pierre Etienne"
+title: "Corruption Indicator"
+author: "Emilie Cottard & Manon Lefeuvre"
 output: 
   flexdashboard::flex_dashboard:
     theme: bootstrap
     orientation: columns
     vertical_layout: fill
-    navbar:
-      - { title: "Moodle", href: "https://tice.agrocampus-ouest.fr/course/view.php?id=6726", align: left }
-      - { icon: "fa-twitter", href: "https://twitter.com/marie_etienne", align: right }
-      - { icon: "fa-linkedin", href: "https://www.linkedin.com/in/marie-etienne-818a7115/", align: right }
 params:
   setup_path: ../resources/
 ---
@@ -34,31 +30,34 @@ library(ggplot2)
 library(plotly)
 ```
 
-Column {data-width=650}
------------------------------------------------------------------------
-
-### Some static graph
+# World Corruption Overview 
 
 ```{r pressure, echo=FALSE, fig.cap="A caption", out.width = '100%'}
 knitr::include_graphics("www/word_indicators.png")
 
 ```
 
-Column {.tabset .tabset-fade}
------------------------------------------------------------------------
 
+# Corruption Evolution in the US
 
-### Some dynamic maps
+```{r, echo=FALSE, fig.cap="A caption", out.width = '100%'}
+knitr::include_graphics("www/graph_evolution.png")
 
-```{r  ggplotly, echo = TRUE,  eval = TRUE,  message = FALSE, warning=FALSE}
-plotly::ggplotly(p1)
+```
+
+# Indicators Repartition in the US
+
+```{r, echo=FALSE, fig.cap="A caption", out.width = '100%'}
+knitr::include_graphics("www/word_indicators.png")
+
 ```
 
 
 
 ### Chart C
 
-```{r}
+```{r , echo=FALSE, fig.cap="A caption", out.width = '100%'}
+knitr::include_graphics("www/word_indicators.png")
 
 ```
 
