@@ -32,7 +32,7 @@ library(plotly)
 
 # World Corruption Overview 
 
-```{r pressure, echo=FALSE, fig.cap="A caption", out.width = '100%'}
+```{r pressure, echo=FALSE, out.width = '100%'}
 knitr::include_graphics("www/word_indicators.png")
 
 ```
@@ -40,24 +40,15 @@ knitr::include_graphics("www/word_indicators.png")
 
 # Corruption Evolution in the US
 
-```{r, echo=FALSE, fig.cap="A caption", out.width = '100%'}
+```{r, echo=FALSE,out.width = '100%'}
 knitr::include_graphics("www/graph_evolution.png")
 
 ```
 
 # Indicators Repartition in the US
 
-```{r, echo=FALSE, fig.cap="A caption", out.width = '100%'}
-knitr::include_graphics("www/word_indicators.png")
-
-```
-
-
-
-### Chart C
-
-```{r , echo=FALSE, fig.cap="A caption", out.width = '100%'}
-knitr::include_graphics("www/word_indicators.png")
+```{r, echo=FALSE, out.width = '100%'}
+knitr::include_graphics("www/indicators_repartition.png")
 
 ```
 
